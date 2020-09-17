@@ -65,14 +65,36 @@ def evalsum(s):
 
 def cuberoot(n):
     """Computes the cube root of float n by fixpoint iteration"""
+    n2 = n
+    new = (n/(n2**2)+(2*n2))/3
+    while abs(n2) - abs(new) > 0.00000001:
+        n2 = new
+        new = (n/(n2**2)+(2*n2))/3
+    return new
 
-    pass
-
-
+def helper(l):
+    if len(l) <= 1:
+        yield l
+        yield []
+    else:
+        for item in helper(l[1:]):
+            yield [l[0]]+item
+            yield item
+            
 def powerset(st):
     """computes the power set of an input set st"""
+    n = set(st)
+    newlist = []
+    while len(n) > 0:
+        h = n.pop()
+        newlist = newlist + [h]
+    flist = (x for x in helper(newlist))
+    flist = list(flist)
+    newset = set()
+    for i in range(len(flist)):
+        newset.add(frozenset(flist[i]))
+    return newset
 
-    pass
 
 
 def cartesianproduct(lst):
@@ -85,5 +107,3 @@ def transitiveclosure(g):
     """computes the transitive closure of a graph/relation encoded as as a set of 2-tuples"""
 
     pass
-
-

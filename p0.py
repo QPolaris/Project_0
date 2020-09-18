@@ -7,7 +7,7 @@
 # unauthorized assistance, and have followed the academic honor code.
 
 
-import re, calendar, string
+import re, calendar, string, itertools
 
 
 ### Modify code below.
@@ -99,8 +99,10 @@ def powerset(st):
 
 def cartesianproduct(lst):
     """Takes a list of sets/frozensets and computes their Cartesian product"""
-
-    pass
+    new = set()
+    for i in itertools.product(*lst):
+        new.add(tuple(i))
+    return new
     
 
 def transitiveclosure(g):

@@ -20,7 +20,6 @@ def phonenumber(s):
             s = s.translate (str.maketrans ({c:None for c in string.punctuation}))
             s = s.translate (str.maketrans ({c:None for c in string.whitespace}))
             int(s)
-            print (s)
             return s
         else:
             return None
@@ -107,5 +106,11 @@ def cartesianproduct(lst):
 
 def transitiveclosure(g):
     """computes the transitive closure of a graph/relation encoded as as a set of 2-tuples"""
-
-    pass
+    s = set(g)
+    while True:
+        c = set((l,m) for l,n in s for o,m in s if o == n)
+        b = s | c
+        if b == s:
+            break
+        s = b
+    return s
